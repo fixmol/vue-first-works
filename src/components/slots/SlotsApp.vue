@@ -1,0 +1,3 @@
+<template>
+  <div class="card">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos laboriosam pariatur enim iusto natus nemo earum odio magni officiis in labore obcaecati illo iure repudiandae fugiat, quasi error porro, voluptates expedita? Minus asperiores, ex sint quos aliquam ullam commodi nam. Ab assumenda corrupti aperiam fuga eum ut deleniti recusandae voluptatibus.</div>
+</template>
