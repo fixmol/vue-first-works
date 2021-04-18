@@ -3,24 +3,24 @@
 
     <div class="header">
       <button class="btn_header"
-      :class="{'active': selectedNews}"
-      @click="toSelectNews">
+      :class="{'active': activeComponent == 'news'}"
+      @click="activeComponent = 'news'">
       News Block</button>
+      
+      <button class="btn_header"
+      :class="{'active': activeComponent == 'tasks'}"
+      @click="activeComponent = 'tasks'">
+      Tasks App</button>
 
       <button class="btn_header"
-      :class="{'active': selectedSlots}"
-      @click="toSelectSlots">
-      Slots Block</button>
-
-      <button class="btn_header"
-      :class="{'active': selectedDynamic}"
-      @click="toSelectDynamic">
-      Dynamic Block</button>
+      :class="{'active': activeComponent == 'async'}"
+      @click="activeComponent = 'async'">
+      Async Block</button>
     </div>
 
-    <news-app v-if="selectedNews"></news-app>
-    <slots-app v-if="selectedSlots"></slots-app>
-    <async-comp v-if="selectedDynamic"></async-comp>
+    <keep-alive>
+      <component :is="componentName"></component>
+    </keep-alive>
 
   </div>
 </template>
@@ -28,36 +28,26 @@
 
 <script>
 import NewsApp from './components/news/NewsApp'
-import SlotsApp from './components/slots/SlotsApp'
-import AsyncComp from './components/dynamic/AsyncComp'
+import TasksApp from './components/task/TasksApp'
+import AsyncApp from './components/dynamic/AsyncApp'
 
 export default {
   data() {
     return {
-      selectedNews: true,
-      selectedSlots: false,
-      selectedDynamic: false
+      activeComponent: 'news'
     }
   },
 
-  methods: {
-    toSelectNews() {
-      this.selectedNews = !this.selectedNews
-    },
-
-    toSelectSlots() {
-      this.selectedSlots = !this.selectedSlots
-    },
-
-    toSelectDynamic() {
-      this.selectedDynamic = !this.selectedDynamic
+  computed: {
+    componentName() {
+      return this.activeComponent + '-app'
     }
   },
 
   components: {
     'news-app': NewsApp,
-    'slots-app': SlotsApp,
-    'async-comp': AsyncComp
+    'tasks-app': TasksApp,
+    'async-app': AsyncApp
   }
 }
 </script>

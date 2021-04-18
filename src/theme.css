@@ -5,8 +5,8 @@
 
 body {
   width: 99%;
-  height: 100vh;
-  background: linear-gradient(#250036, #050007);
+  height: 100%;
+  background: rgb(97, 24, 94);
   overflow: auto;
 }
 
@@ -17,17 +17,16 @@ body {
 .header {
   max-width: fit-content;
   padding: 0.8rem;
-  margin: 1rem auto;
+  margin: 1.3rem auto;
   border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.6);
   background: rgba(255, 255, 255, 0.849);
 }
 
 .card {
   max-width: 700px;
-  padding: 1rem;
+  padding: .6rem 1rem;
   margin: 1rem auto;
-  margin-bottom: 1rem;
   border-radius: 10px;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
   background: #fff;
@@ -99,4 +98,45 @@ body {
 
 .unread {
   background: rgb(128, 128, 128);
+}
+/* ================================== */
+
+.card_tasks {
+  margin: 0;
+  text-align: center;
+  /* box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4); */
+}
+
+.input_tasks {
+  width: 500px;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.button_tasks {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-top: 1px;
+  padding: 5px 10px;
+  color: white;
+  border: 0px;
+  background: rgb(69, 175, 48);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button_tasks:hover {
+  background: rgba(69, 175, 48, 0.726);
+}
+
+.tasks_list {
+  margin-top: 20px;
+  padding: 5px;
+  text-align: left;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.task_item {
+  margin: 5px 5px;
 }
