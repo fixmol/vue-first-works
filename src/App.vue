@@ -29,7 +29,7 @@
 <script>
 import NewsApp from './components/news/NewsApp'
 import TasksApp from './components/task/TasksApp'
-import AsyncApp from './components/dynamic/AsyncApp'
+import AsyncApp from './components/async/AsyncApp'
 
 export default {
   data() {

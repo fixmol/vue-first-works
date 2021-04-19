@@ -24,7 +24,7 @@ body {
 }
 
 .card {
-  max-width: 700px;
+  max-width: 800px;
   padding: .6rem 1rem;
   margin: 1rem auto;
   border-radius: 10px;
@@ -104,39 +104,104 @@ body {
 .card_tasks {
   margin: 0;
   text-align: center;
-  /* box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4); */
 }
 
-.input_tasks {
-  width: 500px;
+.small_help {
   font-size: 14px;
-  padding: 5px;
+  font-weight: normal;
+  float: right;
+  margin-top: 10px;
+  color: #00000088;
 }
 
-.button_tasks {
+.input_task {
+  width: 600px;
   font-size: 16px;
-  font-weight: bold;
-  margin-left: 10px;
-  margin-top: 1px;
-  padding: 5px 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.add_task {
+  font-size: 16px;
+  margin-left: 15px;
+  padding: 7px 10px;
   color: white;
   border: 0px;
+  border-radius: 5px;
   background: rgb(69, 175, 48);
   cursor: pointer;
   transition: all 0.3s;
 }
 
-.button_tasks:hover {
+.add_task:hover {
   background: rgba(69, 175, 48, 0.726);
 }
 
-.tasks_list {
-  margin-top: 20px;
-  padding: 5px;
+.task_list {
+  width: 100%;
   text-align: left;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  border-radius: 5px;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .task_item {
-  margin: 5px 5px;
+  width: 100%;
+  background: rgb(223, 223, 223);
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.task_button {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  background: rgb(223, 223, 223);
+}
+
+.task_item:hover {
+  background: rgba(46, 181, 31, 0.247);
+  transition: all 0.3s;
+  
+}
+
+.delete_task {
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  background: rgba(196, 74, 74, 0.767);
+  color: white;
+  cursor: pointer;
+  border: 1px solid rgb(107, 107, 107);
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.delete_task:hover {
+  background: rgba(196, 74, 74, 0.938);
+}
+
+.delete_task:disabled {
+  background: rgba(136, 136, 136, 0.938);
+  cursor: not-allowed;
+}
+
+.delete_task_all {
+  font-size: 16px;
+  color: white;
+  background: rgba(196, 74, 74, 0.938);
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 10px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.delete_task_all:hover {
+  background:rgba(196, 74, 74, 0.74);
+  transition: all 0.3s;
 }
