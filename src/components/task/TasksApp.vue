@@ -11,9 +11,12 @@
         @keypress.enter="addTask">
 
         <button class="add_task"
-        @click="addTask">Add</button>
+          @click="addTask"> Add
+        </button>
+
         <button class="delete_task_all"
-        @click="deleteAllTasks">Delete All</button>
+          @click="deleteAllTasks"> Delete All
+        </button>
       </div>
 
       <div v-else>
@@ -26,17 +29,17 @@
       <h4 v-show="!tasksList.length">
       No entries, add the first.</h4>
 
-
       <table class="task_list">
         <tr v-for="(item, index) in tasksList" :key="item">
 
           <td class="task_item" @click.right="changeTask">
-            {{item}} </td>
+            {{ item }}
+          </td>
 
           <td class="task_button">
             <button class="delete_task" :disabled="isChange"
-            @click="tasksList.splice(index, 1)">
-            &#128465;</button>
+              @click="tasksList.splice(index, 1)"> &#128465;
+            </button>
           </td>
 
         </tr>

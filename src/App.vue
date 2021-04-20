@@ -13,8 +13,8 @@
       Tasks App</button>
 
       <button class="btn_header"
-      :class="{'active': activeComponent == 'async'}"
-      @click="activeComponent = 'async'">
+      :class="{'active': activeComponent == 'notes'}"
+      @click="activeComponent = 'notes'">
       Async Block</button>
     </div>
 
@@ -29,7 +29,7 @@
 <script>
 import NewsApp from './components/news/NewsApp'
 import TasksApp from './components/task/TasksApp'
-import AsyncApp from './components/async/AsyncApp'
+import NotesApp from './components/notes/NotesApp'
 
 export default {
   data() {
@@ -47,7 +47,7 @@ export default {
   components: {
     'news-app': NewsApp,
     'tasks-app': TasksApp,
-    'async-app': AsyncApp
+    'notes-app': NotesApp
   }
 }
 </script>
