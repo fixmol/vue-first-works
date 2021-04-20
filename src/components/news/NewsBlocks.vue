@@ -8,6 +8,9 @@
       :classcolor="{'btn_close': isOpenThis}">
       {{isOpenThis ? 'Закрыть' : 'Открыть'}}
       </news-button>
+
+      <span :class="{'check_mark_hide': !isRead}"
+      v-show="isRead"> &#10004; </span>
     </div>
 
     <div v-if="isOpenThis">

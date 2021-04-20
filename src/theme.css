@@ -6,7 +6,7 @@
 body {
   width: 99%;
   height: 100%;
-  background: rgb(97, 24, 94);
+  background: rgb(104, 57, 102);
   overflow: auto;
 }
 
@@ -23,6 +23,23 @@ body {
   background: rgba(255, 255, 255, 0.849);
 }
 
+.card_news {
+  max-width: 800px;
+  height: 550px;
+  padding: .6rem 1rem;
+  margin: 1.5rem 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 183, 183, 0.452);
+  overflow: auto;
+  scroll-behavior: inherit;
+}
+
+.card_news::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 .card {
   max-width: 800px;
   padding: .6rem 1rem;
@@ -30,6 +47,14 @@ body {
   border-radius: 10px;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
   background: #fff;
+}
+
+.titlenews_style {
+  margin-left: 100px;
+}
+
+.viewsrate_style {
+  margin-left: 30px;
 }
 
 /* ================================== */
@@ -82,6 +107,11 @@ body {
   color: #000000;
   background: none;
 }
+
+.check_mark_hide {
+  display: none;
+}
+
 /* ================================== */
 
 .btn_read {
