@@ -27,9 +27,9 @@
 
 
 <script>
-import NewsApp from './components/news/NewsApp'
-import TasksApp from './components/task/TasksApp'
-import NotesApp from './components/notes/NotesApp'
+import NewsApp from './components/NewsApp'
+import TasksApp from './components/TasksApp'
+import NotesApp from './components/NotesApp'
 
 export default {
   data() {

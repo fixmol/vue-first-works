@@ -59,11 +59,13 @@ export default {
         if (this.notesList[i].date.length == 10) {
           if (this.notesList[i].date == textContent.substring(0, 10)) {
             this.notesList.splice(i, 1)
+            this.textareaValue = ''
           }
         }
         else if (this.notesList[i].date.length == 11) {
           if (this.notesList[i].date == textContent.substring(0, 11)) {
             this.notesList.splice(i, 1)
+            this.textareaValue = ''
           }
         }
       }
