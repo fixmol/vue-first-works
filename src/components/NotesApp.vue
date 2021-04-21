@@ -31,6 +31,8 @@
 
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -39,16 +41,41 @@ export default {
     }
   },
 
-  methods: {
-    addNote() {
-      if (this.textareaValue !== '') {
-        let noteData = new Object()
-        noteData.date = new Date().toLocaleTimeString()
-        noteData.text = this.textareaValue
+  mounted() {
+    this.loadNotesList()
+  },
 
-        this.notesList.push(noteData)
-        this.textareaValue = ''
-      }
+  methods: {
+    // addNote() {
+    //   if (this.textareaValue !== '') {
+    //     let noteData = new Object()
+    //     noteData.date = new Date().toLocaleTimeString()
+    //     noteData.text = this.textareaValue
+
+    //     this.notesList.push(noteData)
+    //     this.textareaValue = ''
+    //   }
+    // },
+
+    async addNote() {
+      const response = await axios.post('https://vue-small-projects-default-rtdb.firebaseio.com/notes.json', {
+        date: new Date().toLocaleTimeString(),
+        text: this.textareaValue
+      })
+      console.log(response.data)
+    },
+
+    async loadNotesList() {
+      const response = await axios.get('https://vue-small-projects-default-rtdb.firebaseio.com/notes.json')
+
+      const resultParse = Object.keys(response.data).map(key => {
+        return {
+          id: key,
+          date: response.data[key].date,
+          text: response.data[key].text
+        }
+      })
+      this.notesList = resultParse
     },
 
     deleteNote(event) {
