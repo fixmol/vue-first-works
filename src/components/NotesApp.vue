@@ -64,6 +64,10 @@ export default {
     async loadNotesList() {
       const response = await axios.get('https://vue-small-projects-default-rtdb.firebaseio.com/notes.json')
 
+      if (response.data == null) {
+        return this.notesList = []
+      }
+
       let resultParse = Object.keys(response.data).map(key => {
         return {
           id: key,
