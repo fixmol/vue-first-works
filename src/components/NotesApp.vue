@@ -3,17 +3,16 @@
 
     <div class="card_notes">
       <h3 style="text-align: center">Notes:</h3>
+
       <small style="margin: 30px"
         v-show="!notesList.length">
         There are no entries here yet
       </small>
-      <ul>
-        <li class="notesItem" v-for="item in notesList" :key="item"
-          @click="textareaValue = item.text" @click.right="deleteNote">
-          {{ item.date }} |
-          {{ item.text.substring(0,7) }}{{ item.text.length > 6 ? '..' : '' }}
-        </li>
-      </ul>
+
+      <notes-app-list
+        :notes-list="notesList"
+        @remove="deleteNote">
+      </notes-app-list>
     </div>
 
     <div class="card_textarea">
@@ -31,6 +30,7 @@
 
 
 <script>
+import NotesAppList from './NotesAppList'
 import axios from 'axios'
 
 export default {
@@ -46,29 +46,25 @@ export default {
   },
 
   methods: {
-    // addNote() {
-    //   if (this.textareaValue !== '') {
-    //     let noteData = new Object()
-    //     noteData.date = new Date().toLocaleTimeString()
-    //     noteData.text = this.textareaValue
-
-    //     this.notesList.push(noteData)
-    //     this.textareaValue = ''
-    //   }
-    // },
 
     async addNote() {
       const response = await axios.post('https://vue-small-projects-default-rtdb.firebaseio.com/notes.json', {
         date: new Date().toLocaleTimeString(),
         text: this.textareaValue
       })
-      console.log(response.data)
+      this.notesList.push({
+        id: response.data.name,
+        date: new Date().toLocaleTimeString(),
+        text: this.textareaValue
+      })
+      this.textareaValue = ''
     },
+
 
     async loadNotesList() {
       const response = await axios.get('https://vue-small-projects-default-rtdb.firebaseio.com/notes.json')
 
-      const resultParse = Object.keys(response.data).map(key => {
+      let resultParse = Object.keys(response.data).map(key => {
         return {
           id: key,
           date: response.data[key].date,
@@ -78,29 +74,21 @@ export default {
       this.notesList = resultParse
     },
 
-    deleteNote(event) {
-      event.preventDefault()
-      let textContent = event.target.textContent
 
-      for (let i = 0; i < this.notesList.length; i++) {
-        if (this.notesList[i].date.length == 10) {
-          if (this.notesList[i].date == textContent.substring(0, 10)) {
-            this.notesList.splice(i, 1)
-            this.textareaValue = ''
-          }
-        }
-        else if (this.notesList[i].date.length == 11) {
-          if (this.notesList[i].date == textContent.substring(0, 11)) {
-            this.notesList.splice(i, 1)
-            this.textareaValue = ''
-          }
-        }
-      }
+    async deleteNote(id) {
+      await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/notes/${id}.json`)
+      this.notesList = this.notesList.filter(noteItem => noteItem.id !== id)
     },
 
-    clearAllNotes() {
-      this.notesList = []
+
+    async clearAllNotes() {
+      await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/notes.json`)
+      this.notesList = ''
     }
+  },
+
+  components: {
+    'notes-app-list': NotesAppList
   }
 }
 </script>
