@@ -5,7 +5,7 @@
       <button class="btn_header"
       :class="{'active': activeComponent == 'news'}"
       @click="activeComponent = 'news'">
-      News Block</button>
+      News App</button>
       
       <button class="btn_header"
       :class="{'active': activeComponent == 'tasks'}"
@@ -15,7 +15,7 @@
       <button class="btn_header"
       :class="{'active': activeComponent == 'notes'}"
       @click="activeComponent = 'notes'">
-      Async Block</button>
+      Notes App</button>
     </div>
 
     <keep-alive>
