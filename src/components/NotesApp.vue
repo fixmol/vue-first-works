@@ -5,9 +5,11 @@
       <h3 style="text-align: center">Notes:</h3>
 
       <small style="margin: 30px"
-        v-show="!notesList.length">
+        v-show="!notesList.length && !loading">
         There are no entries here yet
       </small>
+
+      <app-loader v-if="loading"></app-loader>
 
       <notes-list
         @get-text-value="getTextValue"
@@ -37,6 +39,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      loading: false,
       textareaValue: '',
       notesList: []
     }
@@ -63,9 +66,11 @@ export default {
 
 
     async loadNotesList() {
+      this.loading = true
       const response = await axios.get('https://vue-small-projects-default-rtdb.firebaseio.com/notes.json')
 
       if (response.data == null) {
+        this.loading = false
         return this.notesList = []
       }
 
@@ -77,6 +82,7 @@ export default {
         }
       })
       this.notesList = resultParse
+      this.loading = false
     },
 
     async deleteNote(id) {

@@ -24,8 +24,9 @@
       <button class="add_task" @click="toSaveChange">Save changes</button>
     </div>
 
+    <app-loader v-show="loading"></app-loader>
 
-    <h4 v-show="!tasksList.length">
+    <h4 v-show="!tasksList.length && !loading">
     No entries, add the first.</h4>
 
     <tasks-list
@@ -46,6 +47,7 @@ import TasksList from './TasksList'
 export default {
   data() {
     return {
+      loading: false,
       addTaskValue: '',
       changeTaskValue: '',
       tasksList: [],
@@ -73,9 +75,11 @@ export default {
     },
 
     async loadTasksList() {
+      this.loading = true
       const response = await axios.get('https://vue-small-projects-default-rtdb.firebaseio.com/tasks.json')
 
       if (response.data === null) {
+        this.loading = false
         return this.tasksList = []
       }
       const resultParse = Object.keys(response.data).map(keyData => {
@@ -85,6 +89,7 @@ export default {
         }
       })
       this.tasksList = resultParse
+      this.loading = false
     },
 
     async deleteTask(id) {
