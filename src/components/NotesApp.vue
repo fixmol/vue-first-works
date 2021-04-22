@@ -9,10 +9,11 @@
         There are no entries here yet
       </small>
 
-      <notes-app-list
+      <notes-list
+        @get-text-value="getTextValue"
         :notes-list="notesList"
         @remove="deleteNote">
-      </notes-app-list>
+      </notes-list>
     </div>
 
     <div class="card_textarea">
@@ -30,7 +31,7 @@
 
 
 <script>
-import NotesAppList from './NotesAppList'
+import NotesList from './NotesList'
 import axios from 'axios'
 
 export default {
@@ -78,21 +79,25 @@ export default {
       this.notesList = resultParse
     },
 
-
     async deleteNote(id) {
       await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/notes/${id}.json`)
       this.notesList = this.notesList.filter(noteItem => noteItem.id !== id)
     },
 
-
     async clearAllNotes() {
       await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/notes.json`)
       this.notesList = ''
-    }
+    },
+
+    getTextValue(id) {
+      this.notesList.forEach(noteItem => {
+        if (noteItem.id === id) this.textareaValue = noteItem.text
+      })
+    },
   },
 
   components: {
-    'notes-app-list': NotesAppList
+    'notes-list': NotesList
   }
 }
 </script>
