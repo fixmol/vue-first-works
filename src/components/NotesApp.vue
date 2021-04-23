@@ -5,13 +5,13 @@
       <h3 style="text-align: center">Notes:</h3>
 
       <small style="margin: 30px"
-        v-show="!notesList.length && !loading">
+        v-if="!notesList.length && !loading">
         There are no entries here yet
       </small>
 
       <app-loader v-if="loading"></app-loader>
 
-      <notes-list
+      <notes-list v-else
         @get-text-value="getTextValue"
         :notes-list="notesList"
         @remove="deleteNote">

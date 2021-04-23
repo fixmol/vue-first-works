@@ -24,12 +24,12 @@
       <button class="add_task" @click="toSaveChange">Save changes</button>
     </div>
 
-    <app-loader v-show="loading"></app-loader>
-
-    <h4 v-show="!tasksList.length && !loading">
+    <h4 v-if="!tasksList.length && !loading">
     No entries, add the first.</h4>
 
-    <tasks-list
+    <app-loader v-if="loading"></app-loader>
+
+    <tasks-list v-else
     :tasksList="tasksList"
     :isChange="isChange"
     @delete-task="deleteTask"
@@ -53,7 +53,8 @@ export default {
       tasksList: [],
       isChange: false,
       changeId: '',
-      changeIndex: null
+      changeIndex: null,
+      taskItemChanged: null
     }
   },
 
@@ -103,7 +104,8 @@ export default {
     },
 
     async changeTask(id) {
-      if (this.isChange === false) this.isChange = !this.isChange
+      if (this.changeTaskValue === '') {
+        this.isChange = true
 
         this.tasksList.forEach(taskItem => {
           if (taskItem.id === id) {
@@ -112,31 +114,28 @@ export default {
           }
         })
         this.changeId = id
+        this.taskItemChanged = document.querySelector('.task_list')
+        .children[this.changeIndex].children[0]
+        this.taskItemChanged.classList.add('changed_active')
+      }
     },
 
-    // LOL ... Probably, it can be done in a shorter way, but I got this idea.
-    // === >>>
     async toSaveChange() {
-      await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/tasks/${this.changeId}.json`)
-      this.tasksList.splice(this.changeIndex, 1)
-
-      await axios.post('https://vue-small-projects-default-rtdb.firebaseio.com/tasks.json', {
+      await axios.patch(`https://vue-small-projects-default-rtdb.firebaseio.com/tasks/${this.changeId}.json`, {
         taskValue: this.changeTaskValue
       })
-      const response = await axios.get('https://vue-small-projects-default-rtdb.firebaseio.com/tasks.json')
-
-      let resultParse = Object.keys(response.data).map(keyData => {
-        return {
-          id: keyData,
-          taskValue: response.data[keyData].taskValue
-        }
-      })
-      resultParse = resultParse.filter(taskItem => {
-        return taskItem.taskValue === this.changeTaskValue
-      })
-      this.tasksList.splice(this.changeIndex, 0, resultParse[0])
+      this.tasksList[this.changeIndex].taskValue = this.changeTaskValue
       this.changeTaskValue = ''
       this.isChange = false
+      this.taskItemChanged.classList.remove('changed_active')
+
+      let taskItemChanged = document.querySelector('.task_list')
+      .children[this.changeIndex].children[0]
+      taskItemChanged.classList.add('changed')
+      
+      setTimeout(() => {
+        taskItemChanged.classList.remove('changed')
+      }, 3000)
     }
   },
 

@@ -184,6 +184,14 @@ body {
   border-radius: 5px;
 }
 
+.changed {
+  background: rgba(89, 187, 110, 0.404);
+}
+
+.changed_active {
+  border-bottom: 2px solid green;
+}
+
 .task_button {
   padding-left: 5px;
   padding-right: 5px;
@@ -193,8 +201,10 @@ body {
 
 .task_item:hover {
   background: rgba(46, 181, 31, 0.247);
-  transition: all 0.3s;
-  
+  transition: 0.3s;
+}
+.task_item:active {
+  transition: 0s;
 }
 
 .delete_task {
