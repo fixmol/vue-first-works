@@ -337,6 +337,11 @@ body {
   transition: all 0.3s;
 }
 
+.clear_allnotes:disabled {
+  background: #0000006b;
+  cursor: auto;
+}
+
 .notesItem {
   cursor: pointer;
   padding: 2px 3px;

@@ -30,10 +30,10 @@
         Add note </button>
       <button class="clear_text_box" :disabled="!textareaValue"
         @click="clearTextBox">
-        Clear text box</button>
-      <button class="clear_allnotes"
+        Clear box</button>
+      <button class="clear_allnotes" :disabled="!notesList.length"
         @click="clearAllNotes">
-        Clear all </button>
+        Clear all notes </button>
     </div>
 
   </div>
@@ -104,6 +104,7 @@ export default {
     async clearAllNotes() {
       await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/notes.json`)
       this.notesList = []
+      this.textareaValue = ''
     },
 
     clearTextBox() {
