@@ -1,5 +1,7 @@
-# vue-first-works
+# vue-practical-work
 
+### These are my first small practical works in Vue JS
+---
 ## Project setup
 ```
 npm install
