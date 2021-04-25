@@ -284,7 +284,7 @@ body {
 }
 
 .add_note {
-  font-size: 16px;
+  font-size: 15px;
   padding: 7px 10px;
   margin-top: 10px;
   color: white;
@@ -301,7 +301,7 @@ body {
 }
 
 .clear_text_box {
-  font-size: 16px;
+  font-size: 15px;
   padding: 7px 10px;
   margin-left: 10px;
   color: white;
@@ -313,15 +313,25 @@ body {
 }
 
 .clear_text_box:disabled {
-  font-size: 16px;
+  background: rgba(0, 0, 0, 0.411);
+  cursor: auto;
+}
+
+.save_change {
+  font-size: 15px;
   padding: 7px 10px;
   margin-left: 10px;
   color: white;
   border: 0px;
   border-radius: 5px;
+  background: rgba(40, 31, 163, 0.658);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.save_change:disabled {
   background: rgba(0, 0, 0, 0.411);
   cursor: auto;
-  transition: all 0.3s;
 }
 
 .clear_allnotes {

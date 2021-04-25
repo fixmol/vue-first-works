@@ -30,7 +30,10 @@
         Add note </button>
       <button class="clear_text_box" :disabled="!textareaValue"
         @click="clearTextBox">
-        Clear box</button>
+        Clear box </button>
+      <button class="save_change" :disabled="isChangeNote"
+        @click="saveChange">
+        Save Change </button>
       <button class="clear_allnotes" :disabled="!notesList.length"
         @click="clearAllNotes">
         Clear all notes </button>
@@ -49,6 +52,8 @@ export default {
     return {
       loading: false,
       textareaValue: '',
+      isChangeNote: true,
+      idToChange: null,
       notesList: []
     }
   },
@@ -99,6 +104,7 @@ export default {
     async deleteNote(id) {
       await axios.delete(`https://vue-small-projects-default-rtdb.firebaseio.com/notes/${id}.json`)
       this.notesList = this.notesList.filter(noteItem => noteItem.id !== id)
+      this.textareaValue = ''
     },
 
     async clearAllNotes() {
@@ -115,7 +121,29 @@ export default {
       this.notesList.forEach(noteItem => {
         if (noteItem.id === id) this.textareaValue = noteItem.text
       })
+      this.isChangeNote = false
+      this.idToChange = id
     },
+
+    saveChange() {
+      this.notesList.forEach(note => {
+        if (note.id === this.idToChange) {
+          if (this.textareaValue === note.text) {
+            console.log('Нет изменений')
+          } else {
+            axios.patch(`https://vue-small-projects-default-rtdb.firebaseio.com/notes/${this.idToChange}.json`, {
+              text: this.textareaValue
+            })
+            this.notesList.forEach(note => {
+              if (note.id === this.idToChange) {
+                note.text = this.textareaValue
+                this.textareaValue = ''
+              }
+            })
+          }
+        }
+      })
+    }
   },
 
   components: {
