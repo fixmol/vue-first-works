@@ -361,6 +361,27 @@ body {
 .notesItem:hover {
   background: rgba(0, 0, 0, 0.247);
 }
+
+.alert_change {
+  font-size: 14px;
+  position: fixed;
+  margin-top: 15px;
+  margin-left: 270px;
+  padding: 5px 7px;
+  margin-right: 0 auto;
+  border-radius: 10px;
+  background: rgba(255, 222, 35, 0.11);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.308);
+}
+
+.alert_change p {
+  margin: 0;
+}
+
+.hide {
+  display: none;
+}
+
 /* ================================== */
 
 

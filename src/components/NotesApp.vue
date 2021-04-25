@@ -20,6 +20,11 @@
     </div>
 
     <div class="card_textarea">
+      <notes-alert-change
+      :hideAlertChange="hideAlertChange"
+      :textAlertChange="textAlertChange">
+      </notes-alert-change>
+
       <textarea class="textarea"
         v-model="textareaValue"
         @keypress.enter.prevent="addNote">
@@ -45,6 +50,7 @@
 
 <script>
 import NotesList from './NotesList'
+import NotesAlertChange from './NotesAlertChange'
 import axios from 'axios'
 
 export default {
@@ -54,6 +60,8 @@ export default {
       textareaValue: '',
       isChangeNote: true,
       idToChange: null,
+      hideAlertChange: true,
+      textAlertChange: '',
       notesList: []
     }
   },
@@ -129,8 +137,16 @@ export default {
       this.notesList.forEach(note => {
         if (note.id === this.idToChange) {
           if (this.textareaValue === note.text) {
-            console.log('Нет изменений')
-          } else {
+            this.textAlertChange = 'Не было изменений'
+            this.hideAlertChange = false
+            setTimeout(() => this.hideAlertChange = true, 2000)
+          }
+          else if (this.textareaValue.length === 0) {
+            this.textAlertChange = 'Не может быть пустым'
+            this.hideAlertChange = false
+            setTimeout(() => this.hideAlertChange = true, 2000)
+          }
+          else {
             axios.patch(`https://vue-small-projects-default-rtdb.firebaseio.com/notes/${this.idToChange}.json`, {
               text: this.textareaValue
             })
@@ -147,7 +163,8 @@ export default {
   },
 
   components: {
-    'notes-list': NotesList
+    'notes-list': NotesList,
+    'notes-alert-change': NotesAlertChange
   }
 }
 </script>
