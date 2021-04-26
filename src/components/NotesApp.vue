@@ -86,7 +86,11 @@ export default {
         date: new Date().toLocaleTimeString(),
         text: this.textareaValue
       })
+      this.idToChange = null
       this.textareaValue = ''
+      if (this.activeNote !== null) {
+        this.activeNote.classList.remove('notes-item-active')
+      }
     },
 
 
@@ -134,8 +138,7 @@ export default {
         this.activeNote.classList.remove('notes-item-active')
       }
       let noteIndex = this.notesList.findIndex(note => note.id === id)
-      this.activeNote = document.querySelector('.notes-list')
-        .children[noteIndex]
+      this.activeNote = document.querySelector('.notes-list').children[noteIndex]
       this.activeNote.classList.add('notes-item-active')
 
       this.isChangeNote = false
@@ -162,7 +165,6 @@ export default {
             this.notesList.forEach(note => {
               if (note.id === this.idToChange) {
                 note.text = this.textareaValue
-                this.textareaValue = ''
               }
             })
           }
@@ -181,14 +183,14 @@ export default {
 
 <style scoped>
 
-.help_to_delete {
-  position: absolute;
-  opacity: .7;
-}
+  .help_to_delete {
+    position: absolute;
+    opacity: .7;
+  }
 
-.title_list {
-  text-align: center;
-  margin: 0;
-  margin-top: 7px;
-}
+  .title_list {
+    text-align: center;
+    margin: 0;
+    margin-top: 7px;
+  }
 </style>
