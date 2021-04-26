@@ -352,14 +352,22 @@ body {
   cursor: auto;
 }
 
-.notesItem {
+.notes-item {
   cursor: pointer;
   padding: 2px 3px;
   transition: all 0.2s;
 }
 
-.notesItem:hover {
+.notes-item-active {
+  background: rgba(12, 167, 12, 0.432);
+}
+
+.notes-item:hover {
   background: rgba(0, 0, 0, 0.247);
+}
+
+.notes-item:active {
+  background: rgba(12, 167, 12, 0.432);
 }
 
 .alert_change {

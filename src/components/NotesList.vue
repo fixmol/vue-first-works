@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <li class="notesItem" v-for="item in notesList" :key="item.id"
+  <ul class="notes-list">
+    <li class="notes-item" v-for="item in notesList" :key="item.id"
       @click="$emit('get-text-value', item.id)"
       @click.prevent.right="$emit('remove', item.id)">
       {{ item.date }} |

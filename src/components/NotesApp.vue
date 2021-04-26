@@ -62,6 +62,7 @@ export default {
       idToChange: null,
       hideAlertChange: true,
       textAlertChange: '',
+      activeNote: null,
       notesList: []
     }
   },
@@ -129,6 +130,14 @@ export default {
       this.notesList.forEach(noteItem => {
         if (noteItem.id === id) this.textareaValue = noteItem.text
       })
+      if (this.activeNote !== null) {
+        this.activeNote.classList.remove('notes-item-active')
+      }
+      let noteIndex = this.notesList.findIndex(note => note.id === id)
+      this.activeNote = document.querySelector('.notes-list')
+        .children[noteIndex]
+      this.activeNote.classList.add('notes-item-active')
+
       this.isChangeNote = false
       this.idToChange = id
     },
